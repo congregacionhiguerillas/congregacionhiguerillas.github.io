@@ -1,2 +1,0 @@
-# congregacionhiguerillas.github.io
-# probando

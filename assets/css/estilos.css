@@ -1,0 +1,63 @@
+/* Imagen de carga de datos */
+
+#loading-spinner {
+    position: absolute;					top: 50%;						left: 50%;								margin-top: -50px;
+    margin-left: -50px;					border: 16px solid #f3f3f3; 	border-top: 16px solid #3498db; 		border-radius: 50%;
+    width: 120px;						height: 120px;					animation: spin 2s linear infinite; 	z-index: 3000;
+    z-index: 5000;
+}
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+/* ============================================================================================================ */
+/* Select 2 */
+
+/* Establece la altura deseada para el componente Select2 */
+.select2-container--default .select2-selection--single {
+    height: 38px; /* Puedes ajustar la altura según tus necesidades */
+}
+
+/* Establece la altura deseada para las opciones desplegables del Select2 */
+.select2-container--default .select2-results__option {
+    height: 38px; /* Puedes ajustar la altura según tus necesidades */
+}
+
+/* Establece la altura deseada para las opciones seleccionadas del Select2 (múltiple) */
+.select2-container--default .select2-selection__choice {
+    height: 38px; /* Puedes ajustar la altura según tus necesidades */
+}
+
+/* Centrar verticalmente el texto dentro del Select2 */
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+/* Ajusta el z-index del menú desplegable de Select2 */
+.select2-container--default .select2-dropdown--below {
+    z-index: 5000; 
+}
+
+.select2-container--default .select2-dropdown--above {
+    z-index: 5000; 
+}
+
+/* ============================================================================================================ */
+
+.modal-oscuro::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Ajusta el valor alfa para controlar la opacidad del oscurecimiento */
+    z-index: 1050; /* Asegúrate de que el fondo oscuro esté detrás del modal */
+}
+
+/* ============================================================================================================ */
+
+.tooltip-inner {
+    max-width: 1000px !important;
+    text-align: left !important;
+}

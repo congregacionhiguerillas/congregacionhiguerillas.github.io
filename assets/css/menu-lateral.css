@@ -1,0 +1,106 @@
+body {
+    margin: 0;
+    padding: 0;
+  }
+
+  #header-menu-lateral {
+    background-color: #333;
+    color: #fff;
+    padding: 25px;
+    text-align: left;
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 20px;
+  }
+
+  .menu-icon {
+    cursor: pointer;
+    margin-left: 9em;
+    font-size: 1.8em;
+  }
+
+  #nav-menu {
+    width: 250px;
+    height: 100%;
+    background-color: #555;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    transition: 0.2s;
+  }
+
+  #nav-menu ul {
+    list-style: none; /* Quita las viñetas en las listas */
+  }
+
+  #nav-menu a {
+    display: block;
+    padding: 15px;
+    text-decoration: none;
+    color: #fff;
+    border-bottom: 1px solid #777;
+  }
+
+  #nav-menu a:hover {
+    background-color: #777;
+  }
+
+
+
+  .site-title {
+    margin-left: 15px;
+    transition: 0.2s;
+  }
+
+  .sub-options {
+    display: none;
+    list-style-type: none;
+  }
+
+  .sub-options.visible {
+    display: block;
+    margin-left: -20px; /* Agregado por mi */
+  }
+  
+  #contenido {
+	margin-left: 250px;  /* 5-2-2024 */
+  }
+
+  @media screen and (max-width: 500px) 
+  {
+	#contenido {
+		margin-left: 0px;  /* 5-2-2024 */
+	}
+	
+    body {
+      margin-left: 0;
+    }
+
+    #nav-menu {
+      left: -250px;
+    }
+
+    .site-title {
+      display: none;
+    }
+
+    body.menu-open {
+      margin-left: 250px;
+    }
+
+    .menu-icon {
+      margin-left: 15px;
+    }
+  }
+
+  .flecha-derecha::before {
+    content: "→ ";
+    font-weight: bold;
+  }
+
+  .flecha-abajo::before {
+    content: "↓ ";
+    font-weight: bold;
+  }
