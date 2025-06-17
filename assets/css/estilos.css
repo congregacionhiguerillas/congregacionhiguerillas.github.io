@@ -61,3 +61,78 @@
     max-width: 1000px !important;
     text-align: left !important;
 }
+
+/* ============================================================================================================ */
+/* Estilos para el modal del visor PDF */
+
+.pdf-viewer-modal.modal-fullscreen .modal-content {
+    height: 100vh;
+    border: none;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.pdf-viewer-modal .modal-header {
+    background-color: #343a40;
+    color: white;
+    padding: 0.5rem 1rem;
+}
+
+.pdf-viewer-modal .modal-body {
+    padding: 0;
+    flex-grow: 1;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.pdf-viewer-modal #pdf-canvas {
+    display: block;
+    margin: auto;
+    max-width: 100%;
+    height: auto;
+    touch-action: pan-pinch;
+}
+
+.pdf-viewer-modal #pdf-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+    flex-wrap: wrap;
+}
+
+/* Estilos para el modal de mensajes */
+.message-box-modal .modal-dialog {
+    border-radius: 0.5rem;
+}
+
+.message-box-modal .modal-content {
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.message-box-modal .modal-header {
+    background-color: #343a40; /* Usamos bg-dark de Bootstrap */
+    color: white;
+    border-top-left-radius: calc(0.5rem - 1px);
+    border-top-right-radius: calc(0.5rem - 1px);
+    padding: 0.75rem 1.25rem;
+}
+
+.message-box-modal .modal-body {
+    padding: 1.5rem;
+    color: #212529; /* text-gray-800 aproximado */
+}
+
+.message-box-modal .modal-footer {
+    background-color: #f8f9fa; /* bg-light de Bootstrap */
+    border-bottom-left-radius: calc(0.5rem - 1px);
+    border-bottom-right-radius: calc(0.5rem - 1px);
+    padding: 0.75rem 1.25rem;
+}
+
+/* ============================================================================================================ */
