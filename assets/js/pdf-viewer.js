@@ -124,44 +124,63 @@ const PDFViewerModule = (() => {
     }
 
     /** Asigna los oyentes de eventos a los controles del visor. */
-    function _attachEventListeners() {
+    function _attachEventListeners() 
+    {
+        // Controles de navegación y zoom
         _elements.prevPageBtn.addEventListener('click', _onPrevPage);
         _elements.nextPageBtn.addEventListener('click', _onNextPage);
         _elements.zoomInBtn.addEventListener('click', _onZoomIn);
         _elements.zoomOutBtn.addEventListener('click', _onZoomOut);
+
+        // Botón de descarga
         _elements.downloadPdfBtn.addEventListener('click', _onDownloadPdf);
 
-        // Event listeners para gestos táctiles (zoom y paneo)
+        // Event listeners para gestos táctiles (zoom de pinza y paneo)
+        // touchstart: Captura el inicio del gesto. passive: true para no bloquear el scroll inicial.
         _elements.canvas.addEventListener('touchstart', (e) => {
-            if (e.touches.length === 2) {
+            if (e.touches.length === 2) { // Solo si hay dos dedos para zoom de pinza
                 _initialPinchDistance = _getPinchDistance(e);
                 _initialScale = _scale;
             }
-        }, { passive: true }); // Usar passive: true para mejorar rendimiento táctil
+            // No se llama a preventDefault aquí para permitir el scroll nativo con un solo dedo.
+        }, { passive: true });
 
+        // touchmove: Detecta el movimiento de los dedos.
+        // passive: false es CRÍTICO para permitir preventDefault() y evitar el zoom/scroll nativo del navegador.
         _elements.canvas.addEventListener('touchmove', (e) => {
             if (e.touches.length === 2 && _initialPinchDistance !== null) {
-                e.preventDefault(); // Previene el scroll de la página al hacer zoom
+                e.preventDefault(); // Evita el zoom/scroll nativo del navegador mientras se hace el pinch-zoom
                 const currentPinchDistance = _getPinchDistance(e);
                 const zoomFactor = currentPinchDistance / _initialPinchDistance;
                 _scale = _initialScale * zoomFactor;
                 _renderPage(_pageNum);
             }
-        }, { passive: false }); // passive: false es necesario para preventDefault
+        }, { passive: false });
 
+        // touchend: Reinicia las variables de pinza al levantar los dedos.
         _elements.canvas.addEventListener('touchend', () => {
             _initialPinchDistance = null;
         });
 
-        // Limpiar URL del objeto cuando el modal se cierra
+        // Limpiar URL del objeto y estado del visor cuando el modal se oculta
+        // Esto es vital para liberar memoria, especialmente al cargar múltiples PDFs.
         _elements.modal.addEventListener('hidden.bs.modal', () => {
             if (_currentPdfUrl) {
-                URL.revokeObjectURL(_currentPdfUrl);
+                URL.revokeObjectURL(_currentPdfUrl); // Libera la Object URL creada
                 _currentPdfUrl = null;
                 _currentDownloadUrl = null;
-                _pdfDoc = null; // Limpiar el documento PDF cargado
-                _elements.canvas.getContext('2d').clearRect(0, 0, _elements.canvas.width, _elements.canvas.height); // Limpiar el canvas
+                _pdfDoc = null; // Limpia la referencia al documento PDF cargado
+
+                // Limpia el canvas para eliminar el PDF anterior
+                if (_elements.ctx) {
+                    _elements.ctx.clearRect(0, 0, _elements.canvas.width, _elements.canvas.height);
+                }
             }
+            // Opcional: restablecer el número de página y la escala a los valores iniciales
+            _pageNum = 1;
+            _scale = 1.0;
+            if (_elements.currentPageSpan) _elements.currentPageSpan.textContent = '1';
+            if (_elements.totalPagesSpan) _elements.totalPagesSpan.textContent = '1';
         });
     }
 
